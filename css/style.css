@@ -1,0 +1,301 @@
+/*hasahADS4554/4884645/8*8563+0416ASDASDASAVFVAAsajkasñjas*/
+*
+{
+	margin: 0;
+	border: 0;
+	box-sizing: border-box;
+}
+:root
+{
+	--color-primary:rgb(255, 248, 245);
+	--background-container:  linear-gradient(160deg, rgb(165, 125, 125) 0%, rgb(95, 18, 18) 52%);
+	--border: white;
+	--elements: rgb(252, 218, 198);
+}
+html 
+{
+	font-size: 62.5%;
+}
+body
+{
+	font-family: 'Times New Roman', Times, serif;
+	background: linear-gradient(180deg, rgb(226, 217, 214) 0%, rgb(228, 159, 159) 50%, rgb(230, 217, 217) 100%);
+}
+/*Tamaño del contenedor */
+.container
+{
+	padding: 20px;
+}
+/*/Color del titulo*/
+.title
+{
+	padding: 10px;
+	font-size: 5.2rem;
+	border-radius: 10px ;
+	border: 4px solid var(--border);
+	color: var(--color-primary);
+	background: var(--background-container);
+	height: auto;
+}
+/*/Subtitulo/*/
+.subtitle
+{
+	padding: 10px;
+	font-size: 3.2rem;
+	border-radius: 10px ;
+	border: 4px solid var(--border);
+	text-align: end;
+	background: var(--background-container);
+	color: var(--color-primary);
+	margin: 10px 0 10px 0;
+	height: auto;
+}
+/*/Tamaño del contenedor/*/
+.container-input
+{
+	display: grid;
+	font-size: 1.8rem;
+	border-radius: 10px ;
+	border: 4px solid var(--border) ;
+	grid-template-columns: 5fr 1fr 3fr;
+	background: var(--background-container);
+	padding: 20px;
+	width: calc(100vw - 40px);
+}
+/*/Division del contenedor hijo imgs/*/
+.container-img 
+{
+	display: grid;
+	grid-template-columns: repeat(3 , 1fr);
+	grid-column: 1 / 3;
+	gap: 10px;
+	padding-right: 20px;
+}
+/*/Tamaño de las imagenes para que se ajusten al contenedor/*/
+.container-img img
+{
+	width: 100%;
+	border-radius: 30px ;
+}
+/*/Fondo de caja imagen individual/*/
+.container-img img:nth-child(1)
+{
+	background: radial-gradient(circle, rgba(0,0,0,1) 35%, rgba(49,158,41,1) 100%);
+}
+.container-img img:nth-child(2)
+{
+	background: radial-gradient(circle, rgba(0,0,0,1) 35%, rgba(47,28,139,1) 100%);
+}
+.container-img img:nth-child(3)
+{
+	background: radial-gradient(circle, rgba(0,0,0,1) 35%, rgb(255, 107, 54) 100%);
+}
+/*/Interactividad de la seccion y la imagen*/
+.capipepo_img , .hipodoge_img ,  .ratigueya_img
+{
+	border: 4px solid var(--border) ;
+}
+/*///////////////*/
+input
+{
+	width: 100%;
+	z-index: 0;
+}
+input:checked + label
+{
+	font-weight: 700;
+}
+/*/Contenedor de la seleccion/*/
+.container-select
+{
+	display: flex;
+	flex-direction: column;
+	font-size: 1.8rem;
+	align-items: end;
+	justify-content: center;
+	gap: 10px;
+}
+
+#button-pet
+{
+	margin-top: 10px;
+}
+/*/Caja uno de los elementos hijos de la seleccion/*/
+.pets 
+{
+	display: flex;
+	width: 100%;
+	height: auto;
+	gap: 10px;
+	padding: 5px 10px 5px 10px;
+	border-radius: 10px ;
+	background-color: var(--elements);
+	justify-content: start;
+	align-items: center;
+
+}
+/*/Tamaño de la fuente de los elementos/*/
+label
+{
+	font-size: 2.8rem;
+	margin-left: 15px;
+}
+/*/Caracteristicas especiales cuando pasa el mouse encima de el /*/
+.pets:hover
+{
+	font-weight: 550;
+	border: 4px solid var(--border) ;
+	cursor: pointer;
+}
+/*/Caracteristicas de los botones/*/
+.button
+{
+	display: flex;
+	width: auto;
+	height: auto;
+	font-size: 2.8rem;
+	padding: 5px 10px 5px 10px;
+	border-radius: 10px ;
+	background-color:	var(--elements);
+	font-family: 'Times New Roman', Times, serif;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+}   
+
+/*/Caracteristicas de los botones al ser seleccionados/*/
+.button:hover
+{
+	border: 4px solid var(--border) ;
+	cursor: pointer;
+}
+/*/Pantalla Secundaria/*/
+/*/Espacio de los elementos/*/
+
+.container-elements
+{
+	grid-column: 2 / 4;
+}
+
+/*/Caracteristicas especiales de los botones/*/
+.elements-button
+{
+	flex-wrap: wrap;
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+}
+.elements .button	
+{
+	display: inline-block;
+	min-width:  48%;
+}
+/*/Uso del boton reiniciar todo/*/
+#restart .button
+{
+	margin: 10px 20px 10px 0;
+	width: 170px;
+	display: inline-block;
+	background-color: rgba(255, 0, 0, 0.247);
+}
+/*/Ganar o perder estilos/*/
+#messages 
+{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: var(--elements);
+	border-radius: 20px ;
+	border: 5px solid var(--border);
+	font-size: 3.2rem;
+	margin: 10px 0 ;
+}
+#messages #result
+{
+	font-size: 3.2rem;
+	color: black;
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
+/*/Grid container/*/
+.elemets-life
+{
+	display: grid;
+      grid-template-columns: repeat(2, 1fr);
+	width: 100%;
+	gap: 10px;
+	height: 400px;
+	text-align: center;
+}
+.player , .enemy
+{
+	width: auto;
+	border-radius: 20px;
+	background-color:  var(--elements);
+	font-size: 2.4rem;
+	padding: 30px 10px 10px 10px;
+}
+.player p , .enemy p
+{
+	color: black;
+}
+#live-pet-player , #live-pet-enemy
+{
+	font-size: 6rem;
+}
+#pet-player , #attack-player , #pet-enemy , #attack-enemy
+{
+	font-weight: 700;
+	margin: 10px 0 10px 0;
+}
+/*/Hastas/*/
+@media (max-width : 720px)
+{
+	.container
+	{
+		padding: 10px;
+	}
+	.title
+	{
+		font-size: 3.2rem;
+		text-align: center;
+	}
+	.container-input
+	{
+		grid-template-columns: 1fr;
+		width: calc(100vw - 20px);
+	}
+	.container-img
+	{
+		display: grid;
+		grid-template-columns: repeat(2 , 1fr);
+		padding: 0;
+	}
+	.container-elements
+	{
+		grid-column: 1 / 4;
+	}
+	label , .button
+	{
+		font-size: 2.4rem;
+	}
+	.pets:nth-child(1)
+	{
+		margin-top: 20px;
+	}
+	.player , .enemy , #messages , #messages #result  , .subtitle
+	{
+		font-size: 2rem;
+	}
+	#restart .button
+	{
+		width: auto;
+	}
+
+	.elements .button	
+	{
+		display: inline-block;
+		min-width:  31%;
+	}
+}
