@@ -2,11 +2,11 @@ const sectionAttack = document.getElementById('select-attacks')
 const sectionRestart = document.getElementById('restart')
 const buttomPetPlayer = document.getElementById('button-pet')
 
-
 const buttonrestart = document.getElementById('button-restart')
 
 const sectionPets = document.getElementById('select-pets')
 
+const spanNamePlayer = document.getElementById('pet-player')
 const spanLifePlayer = document.getElementById('live-pet-player')
 const spanLifeEnemy = document.getElementById('live-pet-enemy')
 
@@ -20,8 +20,8 @@ const buttonsAttackPet = document.getElementById('buttons-attack-pet')
 
 /*/Inicializacion de las variables/*/
 let mokepones = []
-let attackPlayer 
-let attackEnemy 
+let attackPlayer = []
+let attackEnemy = []
 let win
 let optionsMokepons
 let inputHipodoge      
@@ -29,17 +29,16 @@ let inputCapipepo
 let inputRatigueya    
 let buttonMokepons
 let attackPets
+let attackMokeponEnemy
 let lifePlayer = 3;
 let lifeEnemy = 3;
-let buttonFire1
-let buttonFire2
-let buttonFire3
-let buttonWater1
-let buttonWater2
-let buttonLand1
-let buttonLand2
-
-
+let buttonFire
+let buttonWater
+let buttonLand
+let buttons = []
+let fireLogic = 'Fire 🔥'
+let waterLogic = 'Water 💧'
+let landLogic = 'Land 🌱'
 
 /*/Creacion de componentes/*/
 class Mokepon 
@@ -64,28 +63,29 @@ let petRatigueya = new Mokepon('Ratigueya' , './img/Ratigueya-787.png' , 4 , 'ra
 /*/Ataques individuales/*/
 petCapipepo.attacks.push
 (
-    {     nombre: 'Fire 🔥' , id: 'button-fire1'        },
-    {     nombre: 'Fire 🔥' , id: 'button-fire2'        },
-    {     nombre: 'Fire 🔥' , id: 'button-fire3'        },
-    {     nombre: 'Water 💧' , id: 'button-water1'     },
-    {     nombre: 'Land 🌱' , id: 'button-land1'      },
+    {     nombre: fireLogic , id: 'button-fire'        },
+    {     nombre: fireLogic, id: 'button-fire'        },
+    {     nombre: fireLogic , id: 'button-fire'        },
+    {     nombre: waterLogic, id: 'button-water'     },
+    {     nombre: landLogic , id: 'button-land'      },
 )
 petHipodoge.attacks.push
 (
-    {     nombre: 'Fire 🔥' , id: 'button-fire1'        },
-    {     nombre: 'Water 💧' , id: 'button-water1'     },
-    {     nombre: 'Water 💧' , id: 'button-water2'     },
-    {     nombre: 'Land 🌱' , id: 'button-land1'      },
-    {     nombre: 'Land 🌱' , id: 'button-land2'      },
+    {     nombre: fireLogic , id: 'button-fire'        },
+    {     nombre: waterLogic, id: 'button-water'     },
+    {     nombre: waterLogic, id: 'button-water'     },
+    {     nombre: landLogic , id: 'button-land'      },
+    {     nombre: landLogic , id: 'button-land'      },
 )
 petRatigueya.attacks.push
 (
-    {     nombre: 'Fire 🔥' , id: 'button-fire1'        },
-    {     nombre: 'Fire 🔥' , id: 'button-fire2'        },
-    {     nombre: 'Water 💧' , id: 'button-water1'     },
-    {     nombre: 'Land 🌱' , id: 'button-land1'      },
-    {     nombre: 'Land 🌱' , id: 'button-land2'      },
+    {     nombre: fireLogic , id: 'button-fire'        },
+    {     nombre: fireLogic , id: 'button-fire'        },
+    {     nombre: waterLogic, id: 'button-water'     },
+    {     nombre: landLogic , id: 'button-land'      },
+    {     nombre: landLogic , id: 'button-land'      },
 )
+
 /*/Se guardan las variables/*/
 mokepones.push (petCapipepo, petHipodoge, petRatigueya)
 
@@ -110,7 +110,6 @@ function startPlay(){
             afectado = document.getElementById("capipepo_img")
             afectado2 = document.getElementById("hipodoge_img")
             afectado3 = document.getElementById("ratigueya_img")
-
     }
     )
     /*/Ciclo/*/
@@ -137,6 +136,7 @@ function startPlay(){
     }
     )
     
+    /*/Efecto/*/
     capipepo.addEventListener("mouseover", () => {   afectado.className = "capipepo_img";    },   false   )
     capipepo.addEventListener("mouseout", () =>   {   afectado.className = "";                  },   false   )
     hipodoge.addEventListener("mouseover", () => {   afectado2.className = "hipodoge_img";    },   false   )
@@ -159,158 +159,116 @@ function selectPetPlayer ()
     if (inputHipodoge.checked)
     {
             petSelectPlayer = inputHipodoge.id
-            attacksPlayer ()
     } else if (inputCapipepo.checked)
     {
             petSelectPlayer = inputCapipepo.id
-            attacksPlayer ()
     }else if (inputRatigueya.checked)
     {
             petSelectPlayer = inputRatigueya.id
-            attacksPlayer ()
     }else {
             alert ("¡No seleccionaste un animal escogeremos a ElectricDefault!")
             petSelectPlayer = "ElectricDefault"
-            attacksPlayer ()
     }
-    function attacksPlayer ()
+
+    spanNamePlayer.innerHTML = petSelectPlayer
+    attackPlayers(petSelectPlayer)
+    selectPetsEnemy()
+}
+function attackPlayers(petSelectPlayer)
+{
+    let attacksPetsType
+    for (let i = 0; i  < mokepones.length  ; i++) 
     {
-            if (mokepones[0].name == petSelectPlayer)
+        if (mokepones[i].name == petSelectPlayer)
+        {
+            attacksPetsType = mokepones[i].attacks
+        }
+    }
+    seeAttacks(attacksPetsType)
+}
+function seeAttacks(attacksPetsType)
+{
+    attacksPetsType.forEach((attackElements) =>
+    {
+        countElements =
+        `
+        <button id = ${attackElements.id} class="button buttonAttack">${attackElements.nombre}</button>
+        `
+        buttonsAttackPet.innerHTML += countElements
+    })
+    buttonFire   = document.getElementById('button-fire')
+    buttonWater = document.getElementById('button-water')
+    buttonLand   = document.getElementById('button-land')
+    buttons = document.querySelectorAll('.buttonAttack')
+}
+function sequenceAttack()
+{
+    buttons.forEach((button)=>
+    {
+        button.addEventListener('click' , (e) =>
+        {
+            if (e.target.textContent === fireLogic)
             {
-                petCapipepo.attacks.forEach((ataques) =>
-                {
-                        countAttacks = 
-                        `
-                            <button id = ${ataques.id} class="button">${ataques.nombre}</button>
-                        `
-                        buttonsAttackPet.innerHTML += countAttacks
-                        buttonFire1 = document.getElementById(petCapipepo.attacks[0].id)
-                        buttonFire2 = document.getElementById(petCapipepo.attacks[1].id)
-                        buttonFire3 = document.getElementById(petCapipepo.attacks[2].id)
-                        buttonWater1 = document.getElementById(petCapipepo.attacks[3].id)
-                        buttonLand1   = document.getElementById(petCapipepo.attacks[4].id)
-                }
-                )
-                buttonFire1.addEventListener('click' , attackFire)
-                buttonFire2.addEventListener('click' , attackFire)
-                buttonFire3.addEventListener('click' , attackFire)
-                buttonWater1.addEventListener('click' , attackWater)
-                buttonLand1.addEventListener('click' , attackLand)
+                attackPlayer.push(fireLogic)
+                button.disabled = true
+                console.log(attackPlayer)
+                button.style.background = '#f90e0e30'
+                style()
             }
-            else if (mokepones[1].name == petSelectPlayer)
+            else if (e.target.textContent === waterLogic )
             {
-                petHipodoge.attacks.forEach((ataques) =>
-                {
-                        countAttacks = 
-                        `
-                            <button id = ${ataques.id} class="button">${ataques.nombre}</button>
-                        `
-                        buttonsAttackPet.innerHTML += countAttacks
-                        buttonFire1 = document.getElementById(petHipodoge.attacks[0].id)
-                        buttonWater1 = document.getElementById(petHipodoge.attacks[1].id)
-                        buttonWater2 = document.getElementById(petHipodoge.attacks[2].id)
-                        buttonLand1 = document.getElementById(petHipodoge.attacks[3].id)
-                        buttonLand2   = document.getElementById(petHipodoge.attacks[4].id)
-                }
-                )
-                buttonFire1.addEventListener('click' , attackFire)
-                buttonWater1.addEventListener('click' , attackWater)
-                buttonWater2.addEventListener('click' , attackWater)
-                buttonLand1.addEventListener('click' , attackLand)
-                buttonLand2.addEventListener('click' , attackLand)
-            }
-            else if (mokepones[2].name == petSelectPlayer)
-            {
-                petRatigueya.attacks.forEach((ataques) =>
-                {
-                        countAttacks = 
-                        `
-                            <button id = ${ataques.id} class="button">${ataques.nombre}</button>
-                        `
-                        buttonsAttackPet.innerHTML += countAttacks
-                        buttonFire1 = document.getElementById(petRatigueya.attacks[0].id)
-                        buttonFire2 = document.getElementById(petRatigueya.attacks[1].id)
-                        buttonWater1 = document.getElementById(petRatigueya.attacks[2].id)
-                        buttonLand1 = document.getElementById(petRatigueya.attacks[3].id)
-                        buttonLand2   = document.getElementById(petRatigueya.attacks[4].id)
-                }
-                )
-                buttonFire1.addEventListener('click' , attackFire)
-                buttonFire2.addEventListener('click' , attackFire)
-                buttonWater1.addEventListener('click' , attackWater)
-                buttonLand1.addEventListener('click' , attackLand)
-                buttonLand2.addEventListener('click' , attackLand)
+                attackPlayer.push(waterLogic)
+                button.disabled = true
+                console.log(attackPlayer)
+                button.style.background = '#1d28c590'
+                style()
             }
             else
             {
-            petCapipepo.attacks.forEach((ataques) =>
+                attackPlayer.push(landLogic)
+                button.disabled = true
+                console.log(attackPlayer)
+                button.style.background = '#52252f80'
+                style()
+            }
+            function style ()
             {
-                countAttacks = 
-                `
-                        <button id = ${ataques.id} class="button">${ataques.nombre}</button>
-                `
-                buttonsAttackPet.innerHTML += countAttacks
-                buttonFire1 = document.getElementById(petCapipepo.attacks[0].id)
-                buttonFire2 = document.getElementById(petCapipepo.attacks[1].id)
-                buttonFire3 = document.getElementById(petCapipepo.attacks[2].id)
-                buttonWater1 = document.getElementById(petCapipepo.attacks[3].id)
-                buttonLand1   = document.getElementById(petCapipepo.attacks[4].id)
+                button.style.border = '4px solid white'
+                button.style.color = 'white'
             }
-            )
-            buttonFire1.addEventListener('click' , attackFire)
-            buttonFire2.addEventListener('click' , attackFire)
-            buttonFire3.addEventListener('click' , attackFire)
-            buttonWater1.addEventListener('click' , attackWater)
-            buttonLand1.addEventListener('click' , attackLand)
-            }
-    }
+            attackRandomEnemy()
+        })
+    })
 
-
-    document.getElementById('pet-player').innerHTML = petSelectPlayer
-    selectPetsEnemy()
 }
-
 /*/Se selecciona la mascota enemiga/*/
 function selectPetsEnemy() 
 {
     let randomPet  = random(0 , mokepones.length -1)
     petSelectEnemy.innerHTML = mokepones[randomPet].name
-}
-
-/*/Se escoge el ataque /*/      
-function attackFire() 
-{
-    attackPlayer = 'Fuego'
-    attackRandomEnemy ()
-}
-function attackWater() {
-    attackPlayer = 'Agua'
-    attackRandomEnemy ()
-}
-function attackLand(){
-    attackPlayer = 'Tierra'
-    attackRandomEnemy ()
+    attackMokeponEnemy = mokepones[randomPet].attacks
+    sequenceAttack()
 }
 
 /*/El pc escoge el ataque deseado conforme un numero aleatorio/*/
 function attackRandomEnemy(){
-    let attackRandom = random(1,3)  
+    let attackRandom = random(0 , attackMokeponEnemy.length -1)  
 
-    if (attackRandom == 1){
-            attackEnemy = 'Fuego'
-    } else if (attackRandom == 2){
-            attackEnemy = 'Agua'
-    } else  if (attackRandom == 3){
-            attackEnemy = 'Tierra'
+    if (attackRandom == 0 || attackRandom == 1){
+            attackEnemy.push (fireLogic)
+    } else if (attackRandom == 2 || attackRandom == 5){
+            attackEnemy.push (waterLogic)
+    } else  if (attackRandom == 3 || attackRandom == 4){
+            attackEnemy.push (landLogic)
     }
-
+    console.log(attackEnemy)
 combat ()
 }
 function combat ()
 {
     if (attackPlayer == attackEnemy){
             win = "Empataste el combate"
-    } else if ( attackPlayer == 'Fuego' && attackEnemy == 'Tierra' || attackPlayer == 'Agua' && attackEnemy == 'Fuego' || attackPlayer == 'Tierra' && attackEnemy == 'Agua'){
+    } else if ( attackPlayer == fireLogic && attackEnemy == landLogic || attackPlayer == waterLogic && attackEnemy == fireLogic || attackPlayer == landLogic && attackEnemy == waterLogic){
             win = "Ganaste el combate"
             lifeEnemy--
     } else {
@@ -350,30 +308,6 @@ function endMessage (finalResults)
 {
 
     notification.innerHTML= finalResults
-    buttonFire1.disabled = true 
-    buttonWater1.disabled = true
-    buttonLand1.disabled = true
-
-    if(mokepones[0].name == petSelectPlayer)
-    {
-            buttonFire2.disabled = true 
-            buttonFire3.disabled = true 
-    }
-    else if(mokepones[1].name == petSelectPlayer)
-    {
-            buttonWater2.disabled = true
-            buttonLand2.disabled = true
-    }
-    else if(mokepones[2].name == petSelectPlayer)
-    {
-            buttonFire2.disabled = true 
-            buttonLand2.disabled = true
-    }
-    else 
-    {
-            buttonFire2.disabled = true 
-            buttonFire3.disabled = true 
-    }
     sectionRestart.style.display = 'inline-block'
 }
 
