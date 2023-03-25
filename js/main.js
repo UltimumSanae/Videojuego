@@ -65,7 +65,7 @@ class Mokepon
 
 /*/Datos indiviales por mokepon/*/
 let petCapipepo = new Mokepon('Capipepo' , './img/Hipodoge-787.png' , 3 , 'capipepo_select' , 'capipepo_img' , 'affected1')
-let petHipodoge = new Mokepon('Hipodoge' , './img/Capipepo-787.png' , 5 , 'hipodoge_select' , 'hipodoge_img' , 'affected2')
+let petHipodoge = new Mokepon('Hipodoge' , './img/Capipepo-787.png' , 4 , 'hipodoge_select' , 'hipodoge_img' , 'affected2')
 let petRatigueya = new Mokepon('Ratigueya' , './img/Ratigueya-787.png' , 4 , 'ratigueya_select' , 'ratigueya_img' , 'affected3')
 /*/Ataques individuales/*/
 petCapipepo.attacks.push
@@ -73,22 +73,16 @@ petCapipepo.attacks.push
     {     nombre: fireLogic , id: 'button-fire'        },
     {     nombre: waterLogic, id: 'button-water'     },
     {     nombre: landLogic , id: 'button-land'      },
-    {     nombre: waterLogic, id: 'button-water'     },
-    {     nombre: landLogic , id: 'button-land'      },
 )
 petHipodoge.attacks.push
 (
+    {     nombre: waterLogic, id: 'button-water'     },
+    {     nombre: landLogic , id: 'button-land'      },
     {     nombre: fireLogic , id: 'button-fire'        },
-    {     nombre: waterLogic, id: 'button-water'     },
-    {     nombre: landLogic , id: 'button-land'      },
-    {     nombre: waterLogic, id: 'button-water'     },
-    {     nombre: landLogic , id: 'button-land'      },
 )
 petRatigueya.attacks.push
 (
     {     nombre: fireLogic , id: 'button-fire'        },
-    {     nombre: waterLogic, id: 'button-water'     },
-    {     nombre: landLogic , id: 'button-land'      },
     {     nombre: waterLogic, id: 'button-water'     },
     {     nombre: landLogic , id: 'button-land'      },
 )
@@ -164,46 +158,23 @@ function selectPetPlayer ()
     {
             petSelectPlayer = inputHipodoge.id
             lifePlayer = mokepones[1].life
-/*             hipodogeAttacksArray()
- */    } else if (inputCapipepo.checked)
+            hipodogeAttacksArray()
+    } else if (inputCapipepo.checked)
     {
             petSelectPlayer = inputCapipepo.id
             lifePlayer = mokepones[0].life
-/*             capipepoAttacksArray()
- */    }else if (inputRatigueya.checked)
+            capipepoAttacksArray()
+    }else if (inputRatigueya.checked)
     {
             petSelectPlayer = inputRatigueya.id
             lifePlayer = mokepones[2].life
-/*             ratigueyaAttacksArray()
- */    }else 
+            ratigueyaAttacksArray()
+    }else 
     {
         alert("DEBES SELECCIONAR UN ANIMAL")
         location.reload()
     }
-    function hipodogeAttacksArray ()
-    {
-        petHipodoge.attacks.push
-        (
-            {     nombre: landLogic , id: 'button-land'        },
-        )
-    }
-    function capipepoAttacksArray ()
-    {
-        petCapipepo.attacks.push
-        (
-            {     nombre: fireLogic , id: 'button-fire'        },
-            {     nombre: fireLogic , id: 'button-fire'        },
-            {     nombre: fireLogic , id: 'button-fire'        },
-        )
-    }
-    function ratigueyaAttacksArray ()
-    {
-        petRatigueya.attacks.push
-        (
-            {     nombre: fireLogic , id: 'button-fire'        },
-            {     nombre: fireLogic , id: 'button-fire'        },
-        )
-    }
+    
     spanNamePlayer.innerHTML = petSelectPlayer
     attackPlayers(petSelectPlayer)
     selectPetsEnemy()
@@ -224,6 +195,30 @@ function attackPlayers(petSelectPlayer)
     /*/Se inicializa una funcion/*/
     seeAttacks(attacksPetsType)
 }
+function hipodogeAttacksArray ()
+    {
+        petHipodoge.attacks.push
+        (
+            {     nombre: landLogic , id: 'button-land'        },
+            {     nombre: landLogic , id: 'button-land'        }
+        )
+    }
+    function capipepoAttacksArray ()
+    {
+        petCapipepo.attacks.push
+        (
+            {     nombre: fireLogic , id: 'button-fire'        },
+            {     nombre: fireLogic , id: 'button-fire'        }
+        )
+    }
+    function ratigueyaAttacksArray ()
+    {
+        petRatigueya.attacks.push
+        (
+            {     nombre: fireLogic , id: 'button-fire'        },
+            {     nombre: fireLogic , id: 'button-fire'        }
+        )
+    }
 /*/Con el mokepon en el que guardamos los ataques hacemos iteraciones por cada elemento interno que tenga/*/
 function seeAttacks(attacksPetsType)
 {
@@ -254,6 +249,18 @@ function selectPetsEnemy()
         if (petEnemyRandomSelect == mokepones[i].name)
         {
             lifeEnemy = mokepones[i].life
+            if(petSelectPlayer != petEnemyRandomSelect && petEnemyRandomSelect == inputHipodoge.id)
+            {
+                hipodogeAttacksArray()
+            }
+            else if(petSelectPlayer != petEnemyRandomSelect && petEnemyRandomSelect == inputCapipepo.id)
+            {
+                capipepoAttacksArray()
+            }
+            else if(petSelectPlayer != petEnemyRandomSelect && petEnemyRandomSelect == inputRatigueya.id)
+            {
+                ratigueyaAttacksArray()
+            }
         }
     }
     /*/Muestra las vidas iniciales del enemigo y del jugador/*/
@@ -295,137 +302,95 @@ function sequenceAttack()
                 button.style.border = '4px solid white'
                 button.style.color = 'white'
             }
+            /*/Por cada elemento seleccionado se va al a funcion para comprobar que los ataques del jugador ya esten todos seleccionados si llega a ser si entonces por fin atacamos/*/
+            startFight ()
         })
     })
-    attackRandomEnemy()
 }
-/*/Logica de ataque enemiga/*/
-function attackRandomEnemy(){
-    for (let i = 0; i < attackMokeponEnemy.length; i++) 
-    {
-        randomAttacks.push(random(0 , attackMokeponEnemy.length -1) )
-        console.log(randomAttacks)
-    } 
-    arrayElementEnemy()
-    startFight()
-}
-function arrayElementEnemy ()
-{
-    for (let i = 0; i < randomAttacks.length; i++) 
-    {
-        for (let f = i+1 ; f < randomAttacks.length; f++) 
-        {
-            if (i != f)
-            {
-                if(randomAttacks[i] == randomAttacks[f])
-                {
-
-                    if (randomAttacks[f] == randomAttacks.length - 1)
-                        {   randomAttacks[f] = 3  }
-                    else if (randomAttacks[i] == randomAttacks[f] && randomAttacks[i] == 3)
-                        {  randomAttacks[f] = 2 }
-                    else if (randomAttacks[i] == randomAttacks[f] && randomAttacks[f] == 2)
-                        {    randomAttacks[f] = 1  }
-                    else if (randomAttacks[i] != 0)
-                        {  randomAttacks[f] = 0  }
-                    else if (randomAttacks[i] != 4)
-                        {  randomAttacks[f] = 4  }
-                    else if (randomAttacks[i] == 0 )
-                        {  randomAttacks[f]  = 1    }
-                    else if (randomAttacks[i] == 4 )
-                        {  randomAttacks[f]  = 3    }
-                    else
-                        {
-                            if (randomAttacks[f] == randomAttacks.length - 2)
-                                { randomAttacks[f] = randomAttacks [f] + 1 }
-                            else if (randomAttacks[f] == 1)
-                                { randomAttacks[f] = randomAttacks [f] + 1 }
-                            else
-                                {   randomAttacks[f] = randomAttacks [f] + 1    }
-                        }
-                    arrayElementEnemy()
-
-                }
-            }
-        }
-    }
-}
-/*/
-function arrayElementEnemy ( )
-{
-    for (let i = 0; i < randomAttacks.length; i++) 
-    {
-        for (let f = i+1 ; f < randomAttacks.length; f++) 
-        {
-            if (i != f)
-            {
-                if(randomAttacks[i] == randomAttacks[f])
-                console.log("Elementos" + randomAttacks[i] )
-                {
-                    if (randomAttacks[i] == 0 )
-                        {  randomAttacks[f]  = 1    }
-
-                    else if (randomAttacks[i] == randomAttacks.length - 1 )
-                        {  randomAttacks[f] = randomAttacks [f] - 1    }
-                        
-                    else if (randomAttacks[i] == randomAttacks[f])
-                        {
-                            if (randomAttacks[i] == 3)
-                                {   randomAttacks[f] = 2     }
-                            if (randomAttacks[i] == 2)
-                                { randomAttacks[f] = 1 }
-                            else if  (randomAttacks[i] < randomAttacks.length - 2)
-                                {   randomAttacks[f] = randomAttacks [f] + 1 }
-                        }
-
-                    else if (randomAttacks[i] != 0)
-                        {  randomAttacks[f] = 0  }
-                        
-                    else if (randomAttacks[i] != 4)
-                        {  randomAttacks[f] = 4  }
-                }
-                arrayElementEnemy (w + 1)
-
-            }
-        }
-    }
-}
-/*/
-
-/*     if (randomAttacks[i] == 0 )
-    {
-        attackEnemy.push(attackMokeponEnemy[0].nombre)
-    }
-    else if (randomAttacks[i] == 1)
-    {
-        attackEnemy.push(attackMokeponEnemy[1].nombre)
-    } */
-
-
-/*     let attackRandom = random(0 , attackMokeponEnemy.length -1)  
-
-    if (attackRandom == 0 || attackRandom == 1){
-            attackEnemy.push (fireLogic)
-    } else if (attackRandom == 2 || attackRandom == 5){
-            attackEnemy.push (waterLogic)
-    } else  if (attackRandom == 3 || attackRandom == 4){
-            attackEnemy.push (landLogic)
-    } */
-
-function startFight ()
 /*/La logica de pelea inicia cuando el contador llege al limite de elementos de botones/*/
+function startFight ()
 {
+    /*/Itera para descubrir que mokepon es y con eso saber que tamaño debe ser el del array pa que sea verdadero/*/
     for (let i = 0; i < mokepones.length; i++)
     {
         if(mokepones[i].name == petSelectPlayer)
         {
             if(mokepones[i].attacks.length == attackPlayer.length)
             {
-                combat ()
+                attackRandomEnemy()    
             }
         }
     }
 }
+/*/Se crean 5 numeros aleatorios/*/
+function attackRandomEnemy(){
+    for (let i = 0; i < attackMokeponEnemy.length; i++) 
+    {
+        randomAttacks.push(random(0 , attackMokeponEnemy.length -1) )
+    } 
+    arrayElementEnemyStart()
+}
+/*/Se crea un bucle que para salir de el los numeors aleatorios deben ser distintos/*/
+function arrayElementEnemyStart()
+{    
+    arrayElementEnemyBucle()   /*/Se crea el punto de partida del bucle/*/
+
+    function arrayElementEnemyBucle()
+    {
+        for (let i = 0; i < randomAttacks.length; i++)   /*/Se crea el primer iterador de comparacion, este se mantiene durante toda la vida del 2do/*/
+        {
+            for (let f = i+1 ; f < randomAttacks.length; f++)   /*/Para evitar que se compare el primer elemento con el primer elemento y que se compare 2 con 3 y 3 con dos se suma el primer iterado al segundo para que este avanze mas de lo normal/*/
+            {
+                if (i != f) /*/Llega un punto donde se compara 1 con 1 y cuenta como par por tanto lo excluimos/*/
+                {
+                    if(randomAttacks[i] == randomAttacks[f])   /*/Si el caso 1 con 1 no ocurre pero los elementos de los arrays coinciden inicia el ciclo/*/
+                    {
+                        if (randomAttacks[f] == randomAttacks.length - 1) /*/Si el numero mayor esta repetido restale 1/*/
+                            {   randomAttacks[f] = randomAttacks.length - 2  }
+                        else if (randomAttacks[i] == randomAttacks[f] && randomAttacks[i] == randomAttacks.length - 2)  /*/Si el 2do numero mas grande esta repetido restale 1/*/
+                            {  randomAttacks[f] = randomAttacks.length - 3 }
+                        else if (randomAttacks[i] == randomAttacks[f] && randomAttacks[f] == randomAttacks.length - 3)  /*/ Si el 3cer numero mas grande esta repetido restale 1/*/
+                            {    randomAttacks[f] = randomAttacks.length - 4  }  /*/ Si en todas los elementos no existe un 0 crea un 0 /*/
+                        else if (randomAttacks[i] != 0)  
+                            {  randomAttacks[f] = 0  }
+                        else if (randomAttacks[i] != randomAttacks.length - 1) /*/ Si en todos los elementos no existe el numero mas grande crea el numero mas grande/*/
+                            {  randomAttacks[f] = randomAttacks.length - 1  }
+                        else if (randomAttacks[i] == 0 )  /*/Si existe un 0 repetido transformalo en 1/*/
+                            {  randomAttacks[f]  = 1    }
+                        else      /*/Si no ocurre algunos de estos casos intenta/*/
+                            {
+                                if (randomAttacks[f] == randomAttacks.length - 2)     /*/Si el 2do numero mas grande esta repetido sumale 1 /*/
+                                    { randomAttacks[f] = randomAttacks [f] + 1 }
+                                else if (randomAttacks[f] == 1)  /*/Si el numero repetido es 1 sumale 1/*/
+                                    { randomAttacks[f] = randomAttacks [f] + 1 }
+                                else  /*/Si a pesar de que nada de lo anterior ocurra sumale 1 /*/
+                                    {   randomAttacks[f] = randomAttacks [f] + 1    }
+                            }
+                        arrayElementEnemyBucle()  /*/ Vuelve al inicio hasta que ningun numero quede repetido/*/
+                    }
+                }
+            }
+        }
+    }
+    pushAttacksEnemy()     /*/Si se acaba el bucle entoces empieza una nueva funcion/*/
+}
+/*/Ya tenemoslos numeros aleatorios ahora asignemosle al array existente/*/
+function pushAttacksEnemy()
+{
+    for (let i = 0; i < mokepones.length; i++)     /*/Crea un ciclo para encontrar cual mascota del enemigo fue escogida/*/
+    {
+        if(petEnemyRandomSelect == mokepones[i].name)
+        {
+            for (let f = 0; f < randomAttacks.length; f++)              /*/Crea un ciclo y en cada iteracion asignale el valor de los numeros aleatorios al array e inyectalos/*/
+            {        
+                attackEnemy.push (mokepones[i].attacks[randomAttacks[f]].nombre)
+            }
+            combat ()
+        }
+    }                
+}
+
+
 function varCombatFunction (Player ,  Enemy)
 {
     varAttackPlayer = attackPlayer[Player]
