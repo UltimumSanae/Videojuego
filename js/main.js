@@ -409,6 +409,7 @@ function combat ()
             varCombatFunction (i ,  i)
             messageAttackPlayers()
             lifeEnemy--
+
         }
         else 
         {
@@ -434,8 +435,11 @@ function messageAttackPlayers ()
     spanLifeEnemy.innerHTML = lifeEnemy
     lives ()
     function lives () {
-            if (lifePlayer < lifeEnemy)
-            {
+            if(lifeEnemy < 0){
+                lifeEnemy = 0
+            } else if(lifePlayer < 0) {
+                lifeEnemy = 0 
+            }  else if (lifePlayer < lifeEnemy){
                 endMessage("Perdiste el tonero :(")
             } else if (lifeEnemy < lifePlayer) {
                 endMessage("Ganaste el torneo!!!")
