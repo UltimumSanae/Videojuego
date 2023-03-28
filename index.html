@@ -10,27 +10,31 @@
         <h1 class="title">Logical System💦🌱🔥</h1>
 
         <section id="select-pets">
-        
             <h2 class="subtitle">Selecciona la mascota deseada</h2>
-        
             <div  class="container-input">
                 <div  id ="container-card" class="container-img">  </div>
-
                 <div" >
                     <div  id = "container-button" class="container-select"></div>
                     <button  id = "button-pet" class="button">Seleccionar</button>
                 </div>
             </div>
-
         </section>
-
         <section id="select-attacks">
-            <h2 class= "subtitle">Selecciona el ataque deseado</h2>
+            <h2 class= "subtitle ">Recorre el mapa con tu mokepon</h2>
             <div class="container-input elements"  >
+            
+            <section id ="see-map">
+                <canvas id="map"></canvas>
+                <button onmouseup="stopMove()" onmousedown="moveCharacterUp()">UP</button>
+                <button onmouseup="stopMove()" onmousedown="moveCharacterDown()">DOWN</button>
+                <button onmouseup="stopMove()" onmousedown="moveCharacterLeft()">LEFT</button>
+                <button onmouseup="stopMove()" onmousedown="moveCharacterRight()">RIGHT</button>
+            </section>
+            
             <div class="container-elements">
             
+                <h2 class="subtitle subtitle-element">Selecciona el ataque deseado</h2>
             <div id = "buttons-attack-pet" class="elements-button">
-
             </div>
 
             <div id="messages">

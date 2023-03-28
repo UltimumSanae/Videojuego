@@ -1,4 +1,5 @@
-/*hasahADS4554/4884645/8*8563+0416ASDASDASAVFVAAsajkasñjas*/
+/*hasahADS4554/4884645/8*8563+0416ASDASDASAVFVAAsajkasñjas*/    /*/////////////////////////////////CANVAS/
+    /*     canvas.fillRect(5 , 15 , 20 , 40) /*/ 
 *
 {
 	margin: 0;
@@ -47,8 +48,16 @@ body
 	text-align: end;
 	background: var(--background-container);
 	color: var(--color-primary);
-	margin: 10px 0 10px 0;
 	height: auto;
+	margin:  10px 0;
+}
+.subtitle-element
+{
+
+	text-align: center;
+	border: 2px solid var(--border);
+	margin: 0 0 30px 0;
+
 }
 /*/Tamaño del contenedor/*/
 .container-input
@@ -78,20 +87,21 @@ body
 	border-radius: 30px ;
 }
 /*/Fondo de caja imagen individual/*/
-.container-img img:nth-child(1)
+.container-img img:nth-child(1) , .container-img img:nth-child(4)
 {
-	background: radial-gradient(circle, rgba(0,0,0,1) 35%, rgba(49,158,41,1) 100%);
+	background: radial-gradient(circle, rgb(84, 167, 142) 35%, rgb(8, 71, 3) 100%);
 }
-.container-img img:nth-child(2)
+.container-img img:nth-child(2) , .container-img img:nth-child(5)
 {
-	background: radial-gradient(circle, rgba(0,0,0,1) 35%, rgba(47,28,139,1) 100%);
+	background: radial-gradient(circle, rgb(105, 105, 148) 35%, rgb(19, 45, 197) 100%);
 }
-.container-img img:nth-child(3)
+.container-img img:nth-child(3) , .container-img img:nth-child(6)
 {
-	background: radial-gradient(circle, rgba(0,0,0,1) 35%, rgb(255, 107, 54) 100%);
+	background: radial-gradient(circle, rgb(214, 153, 153) 35%, rgb(139, 39, 3) 100%);
 }
+
 /*/Interactividad de la seccion y la imagen*/
-.capipepo_img , .hipodoge_img ,  .ratigueya_img
+.capipepo_img , .hipodoge_img ,  .ratigueya_img, .tupacalma_img, .pydos_img, .langostelvis_img
 {
 	border: 4px solid var(--border) ;
 }
@@ -206,9 +216,9 @@ label
 	justify-content: center;
 	background-color: var(--elements);
 	border-radius: 20px ;
-	border: 5px solid var(--border);
+	border: 2px solid var(--border);
 	font-size: 3.2rem;
-	margin: 10px 0 ;
+	margin: 30px  0 ;
 }
 #messages #result
 {
@@ -248,6 +258,19 @@ label
 {
 	font-weight: 700;
 	margin: 10px 0 10px 0;
+}
+#see-map
+{
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	display: flex;
+	position: relative;
+}
+
+#map
+{
+	border: 2px solid var(--border);
 }
 /*/Hastas/*/
 @media (max-width : 720px)
