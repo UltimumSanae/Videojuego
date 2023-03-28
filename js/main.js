@@ -58,15 +58,15 @@ let canvas = map.getContext('2d')
 let interval
 let mapBackground = new Image()
 mapBackground.src = './img/mokemap.png'
+let sizeCanvas = 20
 let heightMapIdeal
-let widthMap = window.innerWidth 
-const widthMaxMap = 300
-
-if (widthMap > widthMaxMap) {
-    widthMap = widthMaxMap 
+let widthMap = sectionSeeMap.getBoundingClientRect().width - 40 
+if (widthMap > 800 )
+{
+    widthMap = 800
+    sizeCanvas = 80
 }
-heightMapIdeal = widthMap * 600 / 800
-
+heightMapIdeal = widthMap * 3 / 4
 map.width = widthMap
 map.height = heightMapIdeal
 /*/Creacion de componentes/*/
@@ -82,8 +82,8 @@ class Mokepon
             this.attacks = []
             this.x = x
             this.y = y
-            this.width = 80
-            this.height = 80
+            this.width = sizeCanvas
+            this.height = sizeCanvas
             this.mapImg = new Image ()
             this.mapImg.src = imgMap
             this.speedX = 0
