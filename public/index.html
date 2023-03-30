@@ -22,13 +22,15 @@
         <section id="select-attacks">
             <h2 class= "subtitle ">Recorre el mapa con tu mokepon</h2>
             <div class="container-input elements"  >
-            
             <section id ="see-map">
-                <canvas id="map"></canvas>
-                <button onmouseup="stopMove()" onmousedown="moveCharacterUp()">UP</button>
-                <button onmouseup="stopMove()" onmousedown="moveCharacterDown()">DOWN</button>
-                <button onmouseup="stopMove()" onmousedown="moveCharacterLeft()">LEFT</button>
-                <button onmouseup="stopMove()" onmousedown="moveCharacterRight()">RIGHT</button>
+                <canvas id="map">
+                </canvas>
+                <button class="button button-move" ontouchstart="moveCharacterUp()"  ontouchend = "stopMove()"onmouseup="stopMove()" onmousedown="moveCharacterUp()">UP</button>
+                <div>
+                    <button class="button button-move" ontouchstart="moveCharacterLeft()"  ontouchend = "stopMove()"onmouseup="stopMove()" onmousedown="moveCharacterLeft()">LEFT</button>
+                    <button class="button button-move" ontouchstart="moveCharacterRight()"  ontouchend = "stopMove()" onmouseup="stopMove()" onmousedown="moveCharacterRight()">RIGHT</button>
+                </div>
+                <button class="button button-move" ontouchstart="moveCharacterDown()"  ontouchend = "stopMove()" onmouseup="stopMove()" onmousedown="moveCharacterDown()">DOWN</button>
             </section>
             
             <div class="container-elements">

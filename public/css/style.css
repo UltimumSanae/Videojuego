@@ -21,7 +21,9 @@ body
 {
 	font-family: 'Times New Roman', Times, serif;
 	background: linear-gradient(180deg, rgb(226, 217, 214) 0%, rgb(228, 159, 159) 50%, rgb(230, 217, 217) 100%);
+	user-select: none;
 }
+
 /*Tamaño del contenedor */
 .container
 {
@@ -70,6 +72,7 @@ body
 	background: var(--background-container);
 	padding: 20px;
 	width: calc(100vw - 40px);
+	height: calc (100vh - 210px);
 }
 /*/Division del contenedor hijo imgs/*/
 .container-img 
@@ -179,12 +182,22 @@ label
 	border: 4px solid var(--border) ;
 	cursor: pointer;
 }
+#see-map .button-move
+{
+	width: 150px;
+	margin-bottom: 14px ;
+	min-width: 100px;
+}
+div .button-move:nth-child(1)
+{
+	margin-right: 8px;
+}
 /*/Pantalla Secundaria/*/
 /*/Espacio de los elementos/*/
-
 .container-elements
 {
 	grid-column: 2 / 4;
+	padding-left: 20px;
 }
 
 /*/Caracteristicas especiales de los botones/*/
@@ -227,6 +240,7 @@ label
 	display: flex;
 	justify-content: center;
 	width: 100%;
+	padding: 10px 0;
 }
 /*/Grid container/*/
 .elemets-life
@@ -271,6 +285,9 @@ label
 #map
 {
 	border: 2px solid var(--border);
+	background-image: url("https://static.platzi.com/media/user_upload/map-1b5a52ed-5afa-4406-982f-837131dd3ec7.jpg");
+	margin-bottom:  20px;
+	
 }
 /*/Hastas/*/
 @media (max-width : 720px)
@@ -298,6 +315,7 @@ label
 	.container-elements
 	{
 		grid-column: 1 / 4;
+		padding-left: 0px;
 	}
 	label , .button
 	{
@@ -311,6 +329,10 @@ label
 	{
 		font-size: 2rem;
 	}
+	.subtitle-element
+	{
+		margin-top: 20px;
+	}
 	#restart .button
 	{
 		width: auto;
@@ -320,5 +342,9 @@ label
 	{
 		display: inline-block;
 		min-width:  31%;
+	}
+	.button:hover
+	{
+		border: 2px solid var(--border) ;
 	}
 }
